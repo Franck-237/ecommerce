@@ -7,6 +7,7 @@ use Cart;
 
 class WishlistComponent extends Component
 {
+    protected $listeners = ['refreshComponent' => '$refresh'];
     public function render()
     {
         return view('livewire.wishlist-component');

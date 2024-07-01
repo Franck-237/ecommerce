@@ -91,8 +91,9 @@
                                             @if(Auth::user()->utype == 'ADM')
                                                 <ul class="sub-menu">
                                                     <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                                    <li><a href="#">Produits</a></li>
+                                                    <li><a href="{{route('admin.products')}}">Produits</a></li>
                                                     <li><a href="{{route('admin.categories')}}">Catégories</a></li>
+                                                    <li><a href="{{route('admin.home.slider')}}">Manipuler les slides</a></li>
                                                     <li><a href="#">Coupons</a></li>
                                                     <li><a href="#">Orders</a></li>
                                                     <li><a href="#">Customers</a></li>
@@ -111,7 +112,6 @@
                     <div class="hotline d-none d-lg-block">
                         <p><i class="fi-rs-smartphone"></i> (+237) 691 582 120 </p>
                     </div>
-                    <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             @livewire('wishlist-icon-component')
@@ -148,8 +148,28 @@
                     <nav>
                         <ul class="mobile-menu">
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{route('home.index')}}">Accueil</a></li>
+                            <li><a href="about.html">A propos</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{route('shop')}}">Boutique</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog.html">Blog</a></li>
+                            @auth
+                                <li><a href="#">Mon compte<i class="fi-rs-angle-down"></i></a>
+                                    @if(Auth::user()->utype == 'ADM')
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                            <li><a href="{{route('admin.products')}}">Produits</a></li>
+                                            <li><a href="{{route('admin.categories')}}">Catégories</a></li>
+                                            <li><a href="{{route('admin.home.slider')}}">Manipuler les slides</a></li>
+                                            <li><a href="#">Coupons</a></li>
+                                            <li><a href="#">Orders</a></li>
+                                            <li><a href="#">Customers</a></li>
+                                        </ul>
+                                    @else
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('user.dashboard')}}">Dashboard</a></li>
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endif
                         </ul>
                     </nav>
                     <!-- mobile menu end -->

@@ -4,33 +4,44 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Cart;
+use App\Models\Product;
+use Livewire\withPagination;
 
 class CartComponent extends Component
 {
 
+    use WithPagination;
+
+    public $refreshComponent = false;
+
     public function increaseQuantity($rowId) {
-        $product = Cart::get($rowId);
+        $product = Cart::instance('cart')->get($rowId);
         $qty = $product ->qty + 1;
-        Cart::update($rowId, $qty);
+        Cart::instance('cart')->update($rowId, $qty);
+        $this->refreshComponent = !$this->refreshComponent;
     }
 
     public function decreaseQuantity($rowId) {
-        $product = Cart::get($rowId);
+        $product = Cart::instance('cart')->get($rowId);
         $qty = $product ->qty - 1;
-        Cart::update($rowId, $qty);
+        Cart::instance('cart')->update($rowId, $qty);
+        $this->refreshComponent = !$this->refreshComponent;
     }
 
     public function render()
     {
-        return view('livewire.cart-component');
+        $products = Product::all();
+        return view('livewire.cart-component', compact('products'));
     }
 
     public function destroy($id) {
-        Cart::remove($id);
+        Cart::instance('cart')->remove($id);
+        $this->refreshComponent = !$this->refreshComponent;
         session()->flash('success_message', 'Produit supprimer du panier');
     }
 
     public function clearAll() {
-        Cart::destroy();
+        Cart::instance('cart')->destroy();
+        $this->refreshComponent = !$this->refreshComponent;
     }
 }

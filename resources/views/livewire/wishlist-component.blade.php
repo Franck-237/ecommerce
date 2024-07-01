@@ -12,7 +12,7 @@
             border: 1px solid transparent !important;
         }
         .wishlisted i {
-            color: #1259f1 !importantnt;
+            color: #fff !important;
         }
     </style>
     <main class="main">
@@ -27,7 +27,7 @@
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row product-grid-4">
-                    @if(Cart::count() > 0)
+                    @if(Cart::instance('wishlist')->count() > 0)
                     @foreach (Cart::instance('wishlist')->content() as $item)
                         <div class="col-lg-3 col-md-3 col-6 col-sm-6">
                             <div class="product-cart-wrap mb-30">

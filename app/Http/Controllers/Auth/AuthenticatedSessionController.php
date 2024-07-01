@@ -22,19 +22,19 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): View
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return view('livewire.home-component');
+        return redirect()->route('home.index');
     }
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): View
+    public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
 
@@ -42,6 +42,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return view('livewire.home-component');
+        return redirect()->route('home.index');
     }
 }

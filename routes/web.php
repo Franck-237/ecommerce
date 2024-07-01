@@ -12,7 +12,15 @@ use App\Livewire\CategoryComponent;
 use App\Livewire\SearchComponent;
 use App\Livewire\WishlistComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
+use App\Livewire\Admin\AdminProductComponent;
+use App\Livewire\Admin\AdminAddProductComponent;
+use App\Livewire\Admin\AdminEditProductComponent;
 use App\Livewire\Admin\AddCategoriesComponent;
+use App\Livewire\Admin\AdminCategoriesComponent;
+use App\Livewire\Admin\AdminEditHomeSlideComponent;
+use App\Livewire\Admin\AdminHomeSlideComponent;
+use App\Livewire\Admin\AdminHomeSliderComponent;
+use App\Livewire\Admin\AdminEditCategoryComponent;
 use App\Livewire\User\UserDashboardComponent;
 
 /*Route::get('/', function () {
@@ -41,6 +49,14 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/admin/categories', AddCategoriesComponent::class)->name('admin.categories');
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+    Route::get('/admin/category/add', AdminCategoriesComponent::class)->name('admin.category.add');
+    Route::get('/admin/slider', AdminHomeSliderComponent::class)->name('admin.home.slider');
+    Route::get('/admin/slider/add', AdminHomeSlideComponent::class)->name('admin.home.slider.add');
+    Route::get('/admin/products', AdminProductComponent::class)->name('admin.products');
+    Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.product.add');
+    Route::get('/admin/product/edit/{product_id}', AdminEditProductComponent::class)->name('admin.product.edit');
+    Route::get('/admin/slider/edit/{slide_id}', AdminEditHomeSlideComponent::class)->name('admin.home.slider.edit');
+    Route::get('/admin/category/edit/{category_id}', AdminEditCategoryComponent::class)->name('admin.category.edit');
 });
 
 Route::middleware('auth')->group(function () {
