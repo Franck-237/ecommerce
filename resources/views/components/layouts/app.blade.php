@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Leader Electronics</title>
+    <title>StyleStreet</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +36,7 @@
                         <div class="header-info header-info-right">
                             @auth
                                 <ul>
-                                    <li><i class="fi-rs-user"></i> {{ Auth::user()->name }} /
+                                    <li><i class="fi-rs-user"></i> <a href="{{route('profile.edit')}}">{{ Auth::user()->name }}</a> /
                                         <form action="{{route("logout")}}" method="post">
                                             @csrf
                                             <a href="{{route("logout")}}" onclick="event.preventDefault(); this.closest('form').submit();">Deconnexion</a>
@@ -57,7 +57,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="/">Leader Electronics</a>
+                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         @livewire('header-search-component')
@@ -75,33 +75,26 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="{{route('home.index')}}">Leader Electronics</a>
+                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
                                     <li><a href="{{route('home.index')}}">Accueil </a></li>
-                                    <li><a href="about.html">A propos</a></li>
+                                    <li><a href="{{route('about')}}">A propos</a></li>
                                     <li><a href="{{route('shop')}}">Boutique</a></li>
-                                    <li><a href="blog.html">Blog </a></li>
-                                    <li><a href="contact.html"> Nous contacter</a></li>
+                                    <li><a href="{{route('contact')}}"> Nous contacter</a></li>
                                     @auth
+                                        @if(Auth::user()->utype == 'ADM')
                                         <li><a href="#">Mon compte<i class="fi-rs-angle-down"></i></a>
-                                            @if(Auth::user()->utype == 'ADM')
                                                 <ul class="sub-menu">
-                                                    <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                                    <li><a href="{{route('admin.coupons')}}">Coupons</a></li>
                                                     <li><a href="{{route('admin.products')}}">Produits</a></li>
                                                     <li><a href="{{route('admin.categories')}}">Catégories</a></li>
                                                     <li><a href="{{route('admin.home.slider')}}">Manipuler les slides</a></li>
-                                                    <li><a href="#">Coupons</a></li>
-                                                    <li><a href="#">Orders</a></li>
-                                                    <li><a href="#">Customers</a></li>
                                                 </ul>
                                             @else
-                                                <ul class="sub-menu">
-                                                    <li><a href="{{route('user.dashboard')}}">Dashboard</a></li>
-                                                </ul>
                                             @endif
                                         </li>
                                     @endif
@@ -110,7 +103,7 @@
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i> (+237) 691 582 120 </p>
+                        <p><i class="fi-rs-smartphone"></i> (+237) 656 413 387</p>
                     </div>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
@@ -133,7 +126,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{(route('home.index'))}}">Leader Electronics</a>
+                    <a href="{{(route('home.index'))}}">StyleStreet</a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -148,25 +141,18 @@
                     <nav>
                         <ul class="mobile-menu">
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{route('home.index')}}">Accueil</a></li>
-                            <li><a href="about.html">A propos</a></li>
+                            <li><a href="{{route('about')}}">A propos</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{route('shop')}}">Boutique</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog.html">Blog</a></li>
                             @auth
+                            @if(Auth::user()->utype == 'ADM')
                                 <li><a href="#">Mon compte<i class="fi-rs-angle-down"></i></a>
-                                    @if(Auth::user()->utype == 'ADM')
                                         <ul class="sub-menu">
-                                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                                             <li><a href="{{route('admin.products')}}">Produits</a></li>
                                             <li><a href="{{route('admin.categories')}}">Catégories</a></li>
                                             <li><a href="{{route('admin.home.slider')}}">Manipuler les slides</a></li>
-                                            <li><a href="#">Coupons</a></li>
-                                            <li><a href="#">Orders</a></li>
-                                            <li><a href="#">Customers</a></li>
                                         </ul>
                                     @else
-                                        <ul class="sub-menu">
-                                            <li><a href="{{route('user.dashboard')}}">Dashboard</a></li>
-                                        </ul>
                                     @endif
                                 </li>
                             @endif
@@ -176,7 +162,7 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a href="contact.html"> Nous Contacter </a>
+                        <a href="{{route('contact')}}"> Nous Contacter </a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="{{route('login')}}">Connexion </a>
@@ -228,18 +214,18 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
-                            <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="{{route('home.index')}}">Leader Electronics</a>
+                            <div class="logo logo-width-1">
+                                <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Nous Contacter</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Adresse: </strong>Douala, Akwa Rue Dubai
+                                <strong>Adresse: </strong>Douala, Akwa Bureau des transports
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Telephone: </strong>+237 691 582 120
+                                <strong>Telephone: </strong>+237 656 413 387
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Adresse electronique: </strong>leaderelectronics@gmail.com
+                                <strong>Adresse electronique: </strong>franckkamdem260104@gmail.com
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Nous suivre</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
@@ -252,19 +238,17 @@
                     <div class="col-lg-4 col-md-6">
                         <h5 class="widget-title wow fadeIn animated">A Propos</h5>
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                            <li><a href="#">A propos</a></li>
-                            <li><a href="#">Information de livraison</a></li>
-                            <li><a href="#">Politique de confidentialité</a></li>
-                            <li><a href="#">Termes &amp; Conditions</a></li>
-                            <li><a href="#">Nous contacter</a></li>
+                            <li><a href="{{route('about')}}">A propos</a></li>
+                            <li><a href="{{route('privacy')}}">Politique de confidentialité</a></li>
+                            <li><a href="{{route('terms')}}">Termes &amp; Conditions</a></li>
+                            <li><a href="{{route('contact')}}">Nous contacter</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-2  col-md-3">
                         <h5 class="widget-title wow fadeIn animated">Mon Compte</h5>
                         <ul class="footer-list wow fadeIn animated">
-                            <li><a href="my-account.html">Mon compte</a></li>
-                            <li><a href="#">Voir panier</a></li>
-                            <li><a href="#">Mes favoris</a></li>
+                            <li><a href="{{route('shop.cart')}}">Voir panier</a></li>
+                            <li><a href="{{route('shop.wishlist')}}">Mes favoris</a></li>
                         </ul>
                     </div>
                 </div>
@@ -277,7 +261,7 @@
                 </div>
                 <div class="col-lg-6">
                     <p class="float-md-left font-sm text-muted mb-0">
-                        <a href="privacy-policy.html">Politique de confidentialité</a> | <a href="terms-conditions.html">Termes & Conditions</a>
+                        <a href="{{route('privacy')}}">Politique de confidentialité</a> | <a href="{{route('terms')}}">Termes & Conditions</a>
                     </p>
                 </div>
                 <div class="col-lg-6">

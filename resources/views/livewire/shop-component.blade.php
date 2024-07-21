@@ -77,7 +77,7 @@
                             @endphp
                             @foreach ($products as $product)
                                 <div class="col-lg-4 col-md-4 col-6 col-sm-6">
-                                    <div class="product-cart-wrap mb-30">
+                                    <div class="product-cart-wrap mb-30" style="height: 400px">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom" style="height: 250px">
                                                 <a href="{{route('product.details', ['slug'=>$product->slug])}}">
@@ -91,10 +91,18 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <h2 class="pt-3"><a href="{{route('product.details', ['slug'=>$product->slug])}}">{{$product->name}}</a></h2>
-                                            <div class="product-price">
+                                            @if ($product->sale_price)
+                                                <div class="product-price">
+                                                    <span class="old-price">Fcfa {{$product->regular_price}} </span>
+                                                </div>
+                                                <div class="product-price">
+                                                    <span>Fcfa {{$product->sale_price}}</span>
+                                                </div>
+                                            @else
+                                                <div class="product-price">
                                                     <span>Fcfa {{$product->regular_price}} </span>
-                                                {{--<span class="old-price">$245.8</span>--}}
-                                            </div>
+                                                </div>
+                                            @endif
                                             <div class="product-action-1 show">
                                                 @if($witems->contains($product->id))
                                                     <a aria-label="Retirer des favoris" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>

@@ -57,7 +57,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Register
+                    <span></span> Enregistrement
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                                                 <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Enregistrer</button>
                                             </div>
                                         </form>
-                                        <div class="text-muted text-center">Vous avez déjà un compte? <a href="{{route('login')}}">Créez-en un</a></div>
+                                        <div class="text-muted text-center">Vous avez déjà un compte? <a href="{{route('login')}}">Connectez-vous</a></div>
                                     </div>
                                 </div>
                             </div>

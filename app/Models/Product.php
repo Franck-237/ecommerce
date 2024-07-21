@@ -15,6 +15,11 @@ class Product extends Model
         'sale_price', 'SKU', 'stock_status', 'featured', 'quantity', 'image', 'images', 'category_id'
     ];
 
+    public function getCartPriceAttribute()
+    {
+        return $this->sale_price ?? $this->regular_price;
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

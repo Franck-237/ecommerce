@@ -36,6 +36,20 @@ class SearchComponent extends Component
         $this->orderBy = $order;
     }
 
+    public function addToWishlist($product_id, $product_name, $product_price) {
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        return redirect()->route('shop.wishlist');
+    }
+
+    public function removeFromWishlist($product_id) {
+        foreach(Cart::instance('wishlist')->content() as $witem) {
+            if($witem->id==$product_id) {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                return redirect()->route('shop');
+            }
+        }
+    }
+
     public function render()
     {
         if($this->orderBy == 'Prix: Petit au plus grand')

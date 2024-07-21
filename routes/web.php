@@ -4,6 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Livewire\HomeComponent;
+use App\Livewire\ConditionsComponent;
+use App\Livewire\PrivacyComponent;
+use App\Livewire\AboutComponent;
+use App\Livewire\ContactComponent;
 use App\Livewire\ShopComponent;
 use App\Livewire\CartComponent;
 use App\Livewire\DetailsComponent;
@@ -20,7 +24,10 @@ use App\Livewire\Admin\AdminCategoriesComponent;
 use App\Livewire\Admin\AdminEditHomeSlideComponent;
 use App\Livewire\Admin\AdminHomeSlideComponent;
 use App\Livewire\Admin\AdminHomeSliderComponent;
+use App\Livewire\Admin\AdminCouponComponent;
+use App\Livewire\Admin\AdminAddCouponComponent;
 use App\Livewire\Admin\AdminEditCategoryComponent;
+use App\Livewire\Admin\AdminEditCouponComponent;
 use App\Livewire\User\UserDashboardComponent;
 
 /*Route::get('/', function () {
@@ -30,6 +37,10 @@ use App\Livewire\User\UserDashboardComponent;
 Route::get('/', HomeComponent::class)->name('home.index');
 
 Route::get('/shop', ShopComponent::class)->name('shop');
+Route::get('/privacy', PrivacyComponent::class)->name('privacy');
+Route::get('/terms-conditions', ConditionsComponent::class)->name('terms');
+Route::get('/about', AboutComponent::class)->name('about');
+Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/product-category/{slug}', CategoryComponent::class)->name('product.category');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/cart', CartComponent::class)->name('shop.cart');
@@ -48,13 +59,16 @@ Route::middleware(['auth'])->group(function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/admin/categories', AddCategoriesComponent::class)->name('admin.categories');
+    Route::get('/admin/coupons', AdminCouponComponent::class)->name('admin.coupons');
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
     Route::get('/admin/category/add', AdminCategoriesComponent::class)->name('admin.category.add');
+    Route::get('/admin/coupon/add', AdminAddCouponComponent::class)->name('admin.coupon.add');
     Route::get('/admin/slider', AdminHomeSliderComponent::class)->name('admin.home.slider');
     Route::get('/admin/slider/add', AdminHomeSlideComponent::class)->name('admin.home.slider.add');
     Route::get('/admin/products', AdminProductComponent::class)->name('admin.products');
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.product.add');
     Route::get('/admin/product/edit/{product_id}', AdminEditProductComponent::class)->name('admin.product.edit');
+    Route::get('/admin/coupon/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.coupon.edit');
     Route::get('/admin/slider/edit/{slide_id}', AdminEditHomeSlideComponent::class)->name('admin.home.slider.edit');
     Route::get('/admin/category/edit/{category_id}', AdminEditCategoryComponent::class)->name('admin.category.edit');
 });

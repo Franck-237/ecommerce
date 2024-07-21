@@ -8,7 +8,7 @@
             display: block;
         }
         .wishlisted {
-            background-color: #1259f1 !important;
+            background-color: #10a774 !important;
             border: 1px solid transparent !important;
         }
         .wishlisted i {
@@ -32,10 +32,9 @@
                         <div class="col-lg-3 col-md-3 col-6 col-sm-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
+                                    <div class="product-img product-img-zoom" style="height: 250px">
                                         <a href="{{route('product.details', ['slug'=>$item->model->slug])}}">
-                                            <img class="default-img" src="{{ ('assets/imgs/shop/product-') }}{{$item->model->id}}-1.jpg" alt="{{$item->model->name}}">
-                                            <img class="hover-img" src="{{ ('assets/imgs/shop/product-2-2.jpg') }}{{$item->model->id}}-2.jpg" alt="{{$item->model->name}}">
+                                            <img class="default-img" src="{{ ('assets/imgs/products') }}/{{$item->model->image}}" alt="{{$item->model->name}}" style="height: 250px">
                                         </a>
                                     </div>
                                     <div class="product-action-1">
@@ -44,12 +43,12 @@
                                         <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="hot">Hot</span>
+                                        <span class="hot">Favoris</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop.html">Music</a>
+                                        <a href="shop.html">The best</a>
                                     </div>
                                     <h2><a href="{{route('product.details', ['slug'=>$item->model->slug])}}">{{$item->model->name}}</a></h2>
                                     <div class="rating-result" title="90%">

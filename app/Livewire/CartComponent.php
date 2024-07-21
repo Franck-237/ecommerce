@@ -5,43 +5,58 @@ namespace App\Livewire;
 use Livewire\Component;
 use Cart;
 use App\Models\Product;
-use Livewire\withPagination;
 
 class CartComponent extends Component
 {
-
-    use WithPagination;
-
-    public $refreshComponent = false;
-
-    public function increaseQuantity($rowId) {
+    public function increaseQuantity($rowId)
+    {
         $product = Cart::instance('cart')->get($rowId);
-        $qty = $product ->qty + 1;
+        $qty = $product->qty + 1;
         Cart::instance('cart')->update($rowId, $qty);
-        $this->refreshComponent = !$this->refreshComponent;
+        return redirect()->route('shop.cart');
     }
 
-    public function decreaseQuantity($rowId) {
+    public function decreaseQuantity($rowId)
+    {
         $product = Cart::instance('cart')->get($rowId);
-        $qty = $product ->qty - 1;
-        Cart::instance('cart')->update($rowId, $qty);
-        $this->refreshComponent = !$this->refreshComponent;
+        $qty = $product->qty - 1;
+        if ($qty <= 0) {
+            Cart::instance('cart')->remove($rowId);
+        } else {
+            Cart::instance('cart')->update($rowId, $qty);
+        }
+        return redirect()->route('shop.cart');
     }
 
     public function render()
     {
-        $products = Product::all();
-        return view('livewire.cart-component', compact('products'));
+        $cartItems = Cart::instance('cart')->content();
+        $products = Product::whereIn('id', $cartItems->pluck('id'))->get();
+        $subtotal = 0;
+
+        foreach ($products as $product) {
+            // Ajouter un attribut calculé pour le prix utilisé dans le panier
+            $product->cart_price = $product->sale_price ?? $product->regular_price;
+            $subtotal += $product->cart_price * $product->qty;
+        }
+
+        return view('livewire.cart-component', [
+            'products' => $products,
+            'cartItems' => $cartItems,
+            'subtotal' => $subtotal,
+        ]);
     }
 
-    public function destroy($id) {
-        Cart::instance('cart')->remove($id);
-        $this->refreshComponent = !$this->refreshComponent;
-        session()->flash('success_message', 'Produit supprimer du panier');
+    public function destroy($rowId)
+    {
+        Cart::instance('cart')->remove($rowId);
+        session()->flash('success_message', 'Produit supprimé du panier');
+        return redirect()->route('shop.cart');
     }
 
-    public function clearAll() {
+    public function clearAll()
+    {
         Cart::instance('cart')->destroy();
-        $this->refreshComponent = !$this->refreshComponent;
+        return redirect()->route('shop.cart');
     }
 }

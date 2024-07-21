@@ -39,7 +39,18 @@
                                         <h2 class="title-detail">{{$product->name}}</h2>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand">Fcfa {{$product->regular_price}}</span></ins>
+                                                <ins>@if ($product->sale_price)
+                                                    <div class="product-price">
+                                                        <span class="old-price">Fcfa {{$product->regular_price}} </span>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <span>Fcfa {{$product->sale_price}}</span>
+                                                    </div>
+                                                @else
+                                                    <div class="product-price">
+                                                        <span>Fcfa {{$product->regular_price}} </span>
+                                                    </div>
+                                                @endif</ins>
                                                 {{--<ins><span class="old-price font-md ml-15">$200.00</span></ins>
                                                 <span class="save-price  font-md color3 ml-15">25% Off</span>--}}
                                             </div>
@@ -134,15 +145,23 @@
                                                             </div>
                                                     </div>
                                                     <div class="product-badges product-badges-position product-badges-mrg">
-                                                        <span class="hot">Hot</span>
+                                                        <span class="hot">MC</span>
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
                                                     <h2><a href="{{route('product.details', ['slug'=>$rproduct->slug])}}" tabindex="0">{{$rproduct->name}}</a></h2>
-                                                    <div class="product-price">
-                                                        <span>Fcfa {{$rproduct->regular_price}}</span>
-                                                        {{--<span class="old-price">$245.8</span>--}}
-                                                    </div>
+                                                    @if ($rproduct->sale_price)
+                                                <div class="product-price">
+                                                    <span class="old-price">Fcfa {{$rproduct->regular_price}} </span>
+                                                </div>
+                                                <div class="product-price">
+                                                    <span>Fcfa {{$rproduct->sale_price}}</span>
+                                                </div>
+                                            @else
+                                                <div class="product-price">
+                                                    <span>Fcfa {{$rproduct->regular_price}} </span>
+                                                </div>
+                                            @endif
                                                 </div>
                                             </div>
                                         </div>
