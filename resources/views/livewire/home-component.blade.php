@@ -86,6 +86,9 @@
                 <!--End nav-tabs-->
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                        @php
+                            $witems = Cart::instance('wishlist')->content()->pluck('id');
+                        @endphp
                         <div class="row product-grid-4">
                             @foreach ($fproducts as $fproduct)
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
@@ -114,9 +117,14 @@
                                                     <span>Fcfa {{$fproduct->regular_price}} </span>
                                                 </div>
                                             @endif
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Ajouter au panier" class="action-btn hover-up" href="#" wire:click.prevent="store({{$fproduct->id}},'{{$fproduct->name}}','{{$fproduct->regular_price}}')"><i class="fi-rs-shopping-bag-add"></i></a>
-                                        </div>
+                                            <div class="product-action-1 show">
+                                                @if($witems->contains($fproduct->id))
+                                                    <a aria-label="Retirer des favoris" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$fproduct->id}})"><i class="fi-rs-heart"></i></a>
+                                                @else
+                                                    <a aria-label="Ajouter en favoris" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$fproduct->id}}, '{{$fproduct->name}}', '{{$fproduct->regular_price}}')"><i class="fi-rs-heart"></i></a>
+                                                @endif
+                                                <a aria-label="Ajouter au panier" class="action-btn hover-up" href="#" wire:click.prevent="store({{$fproduct->id}},'{{$fproduct->name}}','{{$fproduct->regular_price}}')"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -126,6 +134,9 @@
                     </div>
                     <!--En tab one (Featured)-->
                     <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
+                        @php
+                            $witems = Cart::instance('wishlist')->content()->pluck('id');
+                        @endphp
                         <div class="row product-grid-4">
                             @foreach ($lproducts as $lproduct)
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
@@ -154,9 +165,14 @@
                                                     <span>Fcfa {{$lproduct->regular_price}} </span>
                                                 </div>
                                             @endif
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Ajouter au panier" class="action-btn hover-up" href="#" wire:click.prevent="store({{$lproduct->id}},'{{$lproduct->name}}','{{$lproduct->regular_price}}')"><i class="fi-rs-shopping-bag-add"></i></a>
-                                        </div>
+                                            <div class="product-action-1 show">
+                                                @if($witems->contains($lproduct->id))
+                                                    <a aria-label="Retirer des favoris" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$lproduct->id}})"><i class="fi-rs-heart"></i></a>
+                                                @else
+                                                    <a aria-label="Ajouter en favoris" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$lproduct->id}}, '{{$lproduct->name}}', '{{$lproduct->regular_price}}')"><i class="fi-rs-heart"></i></a>
+                                                @endif
+                                                <a aria-label="Ajouter au panier" class="action-btn hover-up" href="#" wire:click.prevent="store({{$lproduct->id}},'{{$lproduct->name}}','{{$lproduct->regular_price}}')"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +192,7 @@
                     <div class="banner-text d-md-block d-none">
                         <h4 class="mb-15 mt-40 text-brand">Service de reparation</h4>
                         <h1 class="fw-600 mb-20">Nous avons une <br>Autorisation pour les marques vendues</h1>
-                        <a href="{{route('shop')}}" class="btn">Plus d'infos <i class="fi-rs-arrow-right"></i></a>
+                        <a href="{{route('privacy')}}" class="btn">Plus d'infos <i class="fi-rs-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

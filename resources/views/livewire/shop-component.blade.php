@@ -8,7 +8,7 @@
             display: block;
         }
         .wishlisted {
-            background-color: #1259f1 !important;
+            background-color: #ee3232 !important;
             border: 1px solid transparent !important;
         }
         .wishlisted i {
@@ -85,8 +85,12 @@
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
-                                                <a aria-label="Plus de détails" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" href="{{route('product.details', ['slug'=>$product->slug])}}">
-                                                    <i class="fi-rs-search"></i></a>
+                                                @auth
+                                                <a aria-label="Avis sur le produit" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" href="{{route('product.details', ['slug'=>$product->slug])}}">
+                                                    <i class="fa fa-envelope"></i>
+                                                </a>
+                                                @else
+                                                @endauth
                                             </div>
                                         </div>
                                         <div class="product-content-wrap">
@@ -182,8 +186,8 @@
                 sliderrange.slider({
                     range: true,
                     min: 0,
-                    max: 2000000,
-                    values: [0, 2000000],
+                    max: 75000,
+                    values: [0, 75000],
                     slide: function(event, ui) {
                         //amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
                         @this.set('min_value', ui.values[0]);

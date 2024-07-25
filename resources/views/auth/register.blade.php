@@ -81,6 +81,9 @@
                                                 <input type="text" required="" name="email" placeholder="Votre email" :value="old('email')" required>
                                             </div>
                                             <div class="form-group">
+                                                <input type="file"  name="photo" placeholder="Votre photo" :value="old('photo')">
+                                            </div>
+                                            <div class="form-group">
                                                 <input required="" type="password" name="password" placeholder="Mot de passe" required autocomplete="new-password">
                                             </div>
                                             <div class="form-group">

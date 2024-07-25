@@ -50,12 +50,18 @@
                         <div class="panel-collapse collapse coupon_form " id="coupon">
                             <div class="panel-body">
                                 <p class="mb-30 font-sm">Si vous avez un coupon veuillez l'entrer ici pour l'utiliser.</p>
-                                <form method="post">
+                                @if(Session::has('message'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+                                @endif
+                                <form method="post" wire:submit.prevent="applyCoupon">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Entrer le code du coupon...">
+                                        <input type="text" placeholder="Entrer le code du coupon..." name="code" wire:model="code">
                                     </div>
+                                    @error('code')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                     <div class="form-group">
-                                        <button class="btn  btn-md" name="login">Utiliser</button>
+                                        <button type="submit" class="btn  btn-md" name="login">Utiliser</button>
                                     </div>
                                 </form>
                             </div>

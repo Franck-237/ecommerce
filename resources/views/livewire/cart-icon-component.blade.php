@@ -28,7 +28,10 @@
             </div>
             <div class="shopping-cart-button">
                 <a href="{{route('shop.cart')}}" class="outline">Voir panier</a>
-                <a href="{{route('shop.checkout')}}">Achat</a>
+                @auth
+                    <a href="{{route('shop.checkout')}}">Achat</a>
+
+                @endauth
             </div>
         </div>
     </div>

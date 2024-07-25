@@ -14,7 +14,7 @@ class ShopComponent extends Component
     public $orderBy = "Par défaut";
 
     public $min_value = 0;
-    public $max_value = 2000000;
+    public $max_value = 75000;
 
     public function store($product_id, $product_name, $product_price)
     {

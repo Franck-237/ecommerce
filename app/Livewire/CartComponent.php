@@ -32,18 +32,21 @@ class CartComponent extends Component
     {
         $cartItems = Cart::instance('cart')->content();
         $products = Product::whereIn('id', $cartItems->pluck('id'))->get();
-        $subtotal = 0;
 
         foreach ($products as $product) {
             // Ajouter un attribut calculé pour le prix utilisé dans le panier
             $product->cart_price = $product->sale_price ?? $product->regular_price;
-            $subtotal += $product->cart_price * $product->qty;
+
+            foreach ($cartItems as $item) {
+                if ($item->id == $product->id) {
+                    $item->price = $product->cart_price; // Mettre à jour le prix dans le panier
+                }
+            }
         }
 
         return view('livewire.cart-component', [
             'products' => $products,
             'cartItems' => $cartItems,
-            'subtotal' => $subtotal,
         ]);
     }
 

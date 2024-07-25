@@ -4,7 +4,7 @@
             {{ __('Supprimer le compte') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-3 mb-3 text-sm text-gray-600 dark:text-gray-400">
             {{ __('Lorsque le compte est supprimé, toutes les ressources et le contenu de votre compte est supprimé. Veuillez les enregistrer pour éviter des désagrements!') }}
         </p>
     </header>

@@ -133,8 +133,12 @@
                                                         </a>
                                                     </div>
                                                     <div class="product-action-1 d-flex flex-col">
-                                                        <a aria-label="Plus de détails" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" href="{{route('product.details', ['slug'=>$product->slug])}}">
-                                                            <i class="fi-rs-search"></i></a>
+                                                        @auth
+                                                            <a aria-label="Avis sur le produit" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" href="{{route('product.details', ['slug'=>$product->slug])}}">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </a>
+                                                        @else
+                                                        @endauth
                                                             <div class="product-action-1 show d-flex flex-row items-center">
                                                                 @if($witems->contains($product->id))
                                                                     <a aria-label="Retirer des favoris" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>

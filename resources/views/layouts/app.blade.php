@@ -14,6 +14,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/theme/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     @livewireStyles
 </head>
 
@@ -22,7 +23,7 @@
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-xl-6 col-lg-4">
+                    <div class="col-xl-5 col-lg-3">
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
@@ -32,11 +33,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4">
+                    <div class="col-xl-6 col-lg-7">
                         <div class="header-info header-info-right">
                             @auth
                                 <ul>
-                                    <li><i class="fi-rs-user"></i> <a href="{{route('profile.edit')}}">{{ Auth::user()->name }}</a> /
+                                    <li><a href="{{route('profile.edit')}}"><img src="{{ asset('assets/imgs/user') }}/{{ Auth::user()->photo }}" alt="" width="30" style="border: solid 1px white; border-radius: 500px;  padding: 2px 3px;"></a> <a href="{{route('profile.edit')}}">{{ Auth::user()->name }}</a> /
                                         <form action="{{route("logout")}}" method="post">
                                             @csrf
                                             <a href="{{route("logout")}}" onclick="event.preventDefault(); this.closest('form').submit();">Deconnexion</a>
