@@ -86,12 +86,38 @@
                                             </div>
                                             <div class="product-action-1">
                                                 @auth
-                                                <a aria-label="Avis sur le produit" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal" href="{{route('product.details', ['slug'=>$product->slug])}}">
+                                                <a aria-label="Avis sur le produit" class="action-btn hover-up" data-bs-toggle='modal' data-bs-target='#Avis' href="{{route('product.details', ['slug'=>$product->slug])}}">
                                                     <i class="fa fa-envelope"></i>
                                                 </a>
                                                 @else
                                                 @endauth
                                             </div>
+                                            <div class="modal" tabindex="-5" id="Avis">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title">Donner un avis sur ce produit</h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      <form wire:submit.prevent="submitComment">
+                                                        @csrf
+                                                        <select name="product_id" id="" wire:model.defer="product_id">
+                                                            <option value="">Sélectionner le produit</option>
+                                                            @foreach($avis as $avi)
+                                                                    <option value="{{$avi->id}}">{{$avi->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <textarea id="comment" wire:model.defer="comment" name="comment" required ></textarea>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                          <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                        </div>
+                                                      </form>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
                                         </div>
                                         <div class="product-content-wrap">
                                             <h2 class="pt-3"><a href="{{route('product.details', ['slug'=>$product->slug])}}">{{$product->name}}</a></h2>

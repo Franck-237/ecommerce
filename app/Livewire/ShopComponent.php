@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Avis;
 use Cart;
 
 class ShopComponent extends Component
@@ -15,6 +16,10 @@ class ShopComponent extends Component
 
     public $min_value = 0;
     public $max_value = 75000;
+
+    public $comment;
+    public $product_id;
+    public $user_id;
 
     public function store($product_id, $product_name, $product_price)
     {
@@ -63,8 +68,20 @@ class ShopComponent extends Component
         {
             $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->paginate($this->pageSize);
         }
+        $avis = Product::all();
         $nproducts = Product::latest()->take(3)->get();
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('livewire.shop-component', compact('products', 'categories', 'nproducts'));
+        return view('livewire.shop-component', compact('products', 'categories', 'nproducts', 'avis'));
+    }
+
+    public function submitComment()
+    {
+        $avis = new Avis();
+        $avis->product_id = $this->product_id;
+        $avis->user_id = auth()->id();
+        $avis->comment = $this->comment;
+        $avis->save();
+        return redirect()->route('shop');
+        session()->flash('success_message', 'Votre commentaire a été ajouté.');
     }
 }

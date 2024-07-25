@@ -15,6 +15,7 @@ use App\Livewire\CheckoutComponent;
 use App\Livewire\CategoryComponent;
 use App\Livewire\SearchComponent;
 use App\Livewire\WishlistComponent;
+use App\Livewire\AllAvisComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
 use App\Livewire\Admin\AdminProductComponent;
 use App\Livewire\Admin\AdminAddProductComponent;
@@ -37,6 +38,7 @@ use App\Livewire\User\UserDashboardComponent;
 Route::get('/', HomeComponent::class)->name('home.index');
 
 Route::get('/shop', ShopComponent::class)->name('shop');
+Route::get('/all-reviews', AllAvisComponent::class)->name('avis');
 Route::get('/privacy', PrivacyComponent::class)->name('privacy');
 Route::get('/terms-conditions', ConditionsComponent::class)->name('terms');
 Route::get('/about', AboutComponent::class)->name('about');
